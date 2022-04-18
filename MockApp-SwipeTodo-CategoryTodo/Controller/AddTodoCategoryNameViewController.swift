@@ -131,4 +131,24 @@ extension AddTodoCategoryNameViewController: UICollectionViewDelegate,UICollecti
     }
 
     //セルをタップしたら呼ばれるメソッド
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCategoryName: String = categoryNameArray[indexPath.row]
+        // TODO: 強制アンラップなんとかしたい〜
+        let selectedCategoryPhoto: UIImage = UIImage(named: (photoArray[indexPath.row]))!
+        let alertController = UIAlertController(title: "カテゴリ追加", message: "\(selectedCategoryName)をカテゴリ一覧に追加しますか？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (ok) in
+            // TODO: カテゴリ一覧画面に画像をカテゴリ名前を渡す
+            self.categoryInfo.categoryName = selectedCategoryName
+            self.categoryInfo.categoryPhoto = selectedCategoryPhoto
+            self.delegate?.catchCategoryInfo(categoryInfo: self.categoryInfo)
+            self.dismiss(animated: true)
+        }
+        let cancelAction = UIAlertAction(title: "CANCEL", style: .default){ (cancel) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        //OKとCANCELを表示追加し、アラートを表示
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
