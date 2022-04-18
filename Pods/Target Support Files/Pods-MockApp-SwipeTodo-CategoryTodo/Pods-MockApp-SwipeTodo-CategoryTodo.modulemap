@@ -1,0 +1,6 @@
+framework module Pods_MockApp_SwipeTodo_CategoryTodo {
+  umbrella header "Pods-MockApp-SwipeTodo-CategoryTodo-umbrella.h"
+
+  export *
+  module * { export * }
+}
